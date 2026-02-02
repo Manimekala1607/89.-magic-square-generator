@@ -1,1 +1,47 @@
-# 89.-magic-square-generator
+import numpy as np
+order = int(input("Enter order of magic square (order must be odd): "))
+
+if order % 2 == 0:
+    order += 1
+    print("Given order is even so it is incremented by 1")
+
+mid = order // 2
+magic = np.zeros((order, order), dtype=int)
+
+k = mid
+j = 0
+for i in range(1, order*order + 1):
+    magic[j][k] = i
+    p = j
+    q = k
+    j -= 1
+    k += 1
+
+    if j < 0:
+        j = order - 1
+    if k > order - 1:
+        k = 0
+    if magic[j][k] != 0:
+        j = p + 1
+        k = q
+print("Generated Magic Square is:\n")
+for j in range(order):
+    print("|", end="")
+    for k in range(order):
+        print("%4d |" % magic[j][k], end="")
+    print()
+    print("-" * (6 * order))
+output:
+Enter order of magic square (order must be odd): 5
+Generated Magic Square is:
+
+| 17 | 24 |  1 |  8 | 15 |
+------------------------------
+| 23 |  5 |  7 | 14 | 16 |
+------------------------------
+|  4 |  6 | 13 | 20 | 22 |
+------------------------------
+| 10 | 12 | 19 | 21 |  3 |
+------------------------------
+| 11 | 18 | 25 |  2 |  9 |
+------------------------------
